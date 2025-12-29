@@ -16,8 +16,10 @@
     fzf
     gh
     git
+    git-lfs
     gnupg
     go
+    htop
     jq
     k9s
     kubectl
@@ -29,7 +31,6 @@
     neovim
     nnn
     nodePackages.npm
-    nodePackages.yarn
     nodejs
     pinentry-tty
     rbw
@@ -39,6 +40,8 @@
     unzip
     watch
     zoxide
+    python312
+    python312Packages.pip
 
     # Language servers
     gopls
@@ -72,9 +75,24 @@
     onActivation.cleanup = "zap";
     taps = [
       # { name = "homebrew/foobar"; }
+      { name = "snyk/tap"; }
     ];
     brews = [
-      # "foobar"
+      "gettext"
+      "lerna"
+      "robscott/tap/kube-capacity"
+      "homeport/tap/dyff"
+      "kind"
+      "pre-commit"
+      "telnet"
+      "terraform-docs"
+      "tenv"
+      "tfenv"
+      "tflint"
+      "snyk"
+      "valkey"
+      "gomplate"
+      "cookiecutter"
     ];
     casks = [
       "alacritty" # TODO https://github.com/neovim/neovim/issues/3344
@@ -129,7 +147,6 @@
   nix = {
     # configureBuildUsers = true;
     settings = {
-      auto-optimise-store = true;
       experimental-features = [
         "nix-command"
         "flakes"

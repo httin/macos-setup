@@ -27,7 +27,7 @@ default: build
 		&& git pull origin master \
 		&& git remote set-url origin git@github.com:khuedoan/dotfiles
 
-build: /nix /run/current-system/sw/bin/darwin-rebuild /opt/homebrew/bin/brew ~/.git
+build: /nix /run/current-system/sw/bin/darwin-rebuild
 	/run/current-system/sw/bin/nix --experimental-features 'nix-command flakes' build ./\#darwinConfigurations.$(shell hostname -s).system
 	./result/sw/bin/darwin-rebuild switch --flake .
 
