@@ -80,7 +80,7 @@
       { name = "snyk/tap"; }
     ];
     brews = [
-      "ollama"
+      # "ollama"
     ];
     casks = [
       "kitty"

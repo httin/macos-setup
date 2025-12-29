@@ -39,13 +39,9 @@ in
         tenv
         tflint
         yq-go
-        robscott/tap/kube-capacity
-        homeport/tap/dyff
         kind
         pre-commit
-        telnet
         terraform-docs
-        tfenv
         snyk
         valkey
         gomplate
