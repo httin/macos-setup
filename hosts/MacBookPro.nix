@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  username = "tihuynh";
+  username = "khuedoan";
 in
 {
   system.primaryUser = username;
@@ -10,11 +10,16 @@ in
 
   homebrew = {
     casks = [
-      "aws-vpn-client"
       "brave-browser"
-      "cursor"
-      "royal-tsx"
+      "iina"
+      "signal"
+      "steam"
     ];
+    masApps = {
+      # Need to be signed into the Mac App Store
+      "Bitwarden" = 1352778147;
+      "WireGuard" = 1451685025;
+    };
   };
 
   home-manager = {
@@ -25,32 +30,6 @@ in
       programs.home-manager.enable = true;
       home.file.".config/karabiner/karabiner.json".text = builtins.readFile ../files/karabiner.json;
       home.file.".config/kitty/kitty.d/macos.conf".text = builtins.readFile ../files/kitty.conf;
-      home.packages = with pkgs; [
-        acr-cli
-        argocd
-        awscli2
-        azure-cli
-        cmctl
-        istioctl
-        jira-cli-go
-        kubelogin
-        sops
-        ssm-session-manager-plugin
-        tenv
-        tflint
-        yq-go
-        robscott/tap/kube-capacity
-        homeport/tap/dyff
-        kind
-        pre-commit
-        telnet
-        terraform-docs
-        tfenv
-        snyk
-        valkey
-        gomplate
-        cookiecutter
-      ];
     };
   };
 }

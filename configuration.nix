@@ -4,22 +4,24 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep curl
   environment.systemPackages = with pkgs; [
-    aria
+    aria2
     bat
     cargo
     colima
     coreutils
     curl
-    direnv
     docker
     fd
     fzf
     gh
+    ghstack
     git
     git-lfs
     gnupg
     go
     htop
+    imagemagick
+    inetutils
     jq
     k9s
     kubectl
@@ -27,14 +29,15 @@
     kubectx
     kubernetes-helm
     kustomize
+    lima
     mosh
     neovim
     nnn
-    nodePackages.npm
-    nodejs
     pinentry-tty
+    python314
     rbw
     ripgrep
+    sapling
     tmux
     tree
     unzip
@@ -46,11 +49,14 @@
     # Language servers
     gopls
     lua-language-server
+    nil
     nodePackages.typescript-language-server
+    pyright
     rust-analyzer
     terraform-ls
 
     (pass.withExtensions (ext: with ext; [
+      pass-import
       pass-otp
     ]))
   ];
@@ -60,12 +66,8 @@
   ];
 
   fonts = {
-    packages = [
-      (pkgs.nerdfonts.override {
-        fonts = [
-          "FiraCode"
-        ];
-      })
+    packages = with pkgs; [
+      nerd-fonts.fira-code
     ];
   };
 
@@ -78,36 +80,21 @@
       { name = "snyk/tap"; }
     ];
     brews = [
-      "gettext"
-      "lerna"
-      "robscott/tap/kube-capacity"
-      "homeport/tap/dyff"
-      "kind"
-      "pre-commit"
-      "telnet"
-      "terraform-docs"
-      "tenv"
-      "tfenv"
-      "tflint"
-      "snyk"
-      "valkey"
-      "gomplate"
-      "cookiecutter"
+      "ollama"
     ];
     casks = [
-      "alacritty" # TODO https://github.com/neovim/neovim/issues/3344
       "kitty"
       "linearmouse"
+      "secretive"
       "utm"
+      "zen"
     ];
   };
 
   system.defaults = {
-    alf = {
-      globalstate = 1;
-    };
     dock = {
       autohide = true;
+      expose-group-apps = true;
       minimize-to-application = true;
       mru-spaces = false;
       showhidden = true;
@@ -137,12 +124,11 @@
   };
 
   services = {
-    karabiner-elements.enable = true;
+    # TODO some machine have the driver blocked, needs to install from the web
+    # And Karabiner on nix-darwin is currently broken https://github.com/LnL7/nix-darwin/issues/1041
+    # karabiner-elements.enable = true;
     tailscale.enable = true;
   };
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   nix = {
     # configureBuildUsers = true;
@@ -155,19 +141,28 @@
         "@admin"
       ];
     };
+    optimise = {
+      automatic = true;
+    };
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh = {
-    enable = true;
-    enableBashCompletion = false;
-    enableCompletion = false;
-    promptInit = "";
+  programs = {
+    zsh = {
+      enable = true;
+      enableBashCompletion = false;
+      enableCompletion = false;
+      promptInit = "";
+    };
+    direnv = {
+      enable = true;
+      silent = true;
+    };
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 6;
 }
