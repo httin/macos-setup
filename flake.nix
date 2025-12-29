@@ -26,15 +26,6 @@
         ];
         inputs = { inherit nixpkgs darwin home-manager; };
       };
-      "MacBookPro" = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./configuration.nix
-          home-manager.darwinModules.home-manager
-          ./hosts/MacBookPro.nix
-        ];
-        inputs = { inherit nixpkgs darwin home-manager; };
-      };
       "test" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
