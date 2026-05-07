@@ -24,6 +24,7 @@
     inetutils
     jq
     k9s
+    kube-capacity
     kubectl
     kubectl-tree
     kubectx
