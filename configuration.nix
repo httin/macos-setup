@@ -88,7 +88,6 @@
       "linearmouse"
       "secretive"
       "utm"
-      "zen"
     ];
   };
 

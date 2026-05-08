@@ -26,6 +26,15 @@
         ];
         inputs = { inherit nixpkgs darwin home-manager; };
       };
+      "C02FR17BMD6N" = darwin.lib.darwinSystem {
+        system = "x86_64-darwin";
+        modules = [
+          ./configuration.nix
+          home-manager.darwinModules.home-manager
+          ./hosts/C02FR17BMD6N.nix
+        ];
+        inputs = { inherit nixpkgs darwin home-manager; };
+      };
       "test" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
