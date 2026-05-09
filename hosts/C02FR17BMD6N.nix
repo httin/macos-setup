@@ -31,6 +31,7 @@ in
         awscli2
         azure-cli
         cmctl
+        ffmpeg
         istioctl
         jira-cli-go
         kubelogin

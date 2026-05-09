@@ -10,6 +10,7 @@
     colima
     coreutils
     curl
+    codex
     docker
     fd
     fzf
