@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "obsidian"
+  ];
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep curl
   environment.systemPackages = with pkgs; [
@@ -35,15 +39,19 @@
     mosh
     neovim
     nnn
+    obsidian
     pinentry-tty
     python314
     rbw
     ripgrep
+    ruby
     sapling
     tmux
     tree
     unzip
+    uv
     watch
+    wget
     zoxide
     python312
     python312Packages.pip
@@ -79,10 +87,12 @@
     onActivation.cleanup = "zap";
     taps = [
       # { name = "homebrew/foobar"; }
+      { name = "nklmilojevic/sofka"; }
       { name = "snyk/tap"; }
     ];
     brews = [
       # "ollama"
+      "sofka"
     ];
     casks = [
       "kitty"
